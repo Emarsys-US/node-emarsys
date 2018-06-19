@@ -1,0 +1,17 @@
+{
+  "name": "node-emarsys",
+  "version": "1.0.0",
+  "description": "API wrapper for the Emarsys API in NodeJS",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Adam Patarino",
+  "license": "ISC",
+  "dependencies": {
+    "crypto": "^1.0.1",
+    "iso8601": "^1.1.1",
+    "npm": "^6.1.0",
+    "request-promise": "^4.2.2"
+  }
+}
