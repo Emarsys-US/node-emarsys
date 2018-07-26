@@ -58,4 +58,8 @@ module.exports = class API {
     post (uri, data) {
         return rp.post( this.setOptions(uri, {body: JSON.stringify(data)}) );
     }
+    
+    delete (uri, data) {
+        return rp.get( this.setOptions(uri, {qs: data}) );
+    }
 };
