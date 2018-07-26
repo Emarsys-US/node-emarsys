@@ -60,6 +60,6 @@ module.exports = class API {
     }
     
     delete (uri, data) {
-        return rp.get( this.setOptions(uri, {qs: data}) );
+        return rp.delete( this.setOptions(uri, {qs: data}) );
     }
 };
