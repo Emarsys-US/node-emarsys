@@ -56,7 +56,7 @@ api.get('/contact/query/', {
 ## constructor:
 
 
-    const emarsys = require('../helpers/emarsys.js');
+    const emarsys = require('node-emarsys');
 
     var apiHandler = new emarsys(user, pass);
 
@@ -104,7 +104,7 @@ In the event of an error, the [Promise](https://www.promisejs.org/) will be reje
 
     //Example
 
-    const emarsys = require('../helpers/emarsys.js');
+    const emarsys = require('node-emarsys');
 
     var apiHandler = new emarsys(user, pass);
 
@@ -145,7 +145,7 @@ In the event of an error, the [Promise](https://www.promisejs.org/) will be reje
 
     //Example
 
-    const emarsys = require('../helpers/emarsys.js');
+    const emarsys = require('node-emarsys');
 
     var apiHandler = new emarsys(user, pass);
 
@@ -187,7 +187,7 @@ In the event of an error, the [Promise](https://www.promisejs.org/) will be reje
 
     //Example
 
-    const emarsys = require('../helpers/emarsys.js');
+    const emarsys = require('node-emarsys');
 
     var apiHandler = new emarsys(user, pass);
 
