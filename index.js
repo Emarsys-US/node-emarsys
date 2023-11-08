@@ -1,6 +1,5 @@
 const rp = require('request-promise'),
-    crypto = require('crypto'),
-    iso8601 = require('iso8601');
+    crypto = require('crypto');
 
 module.exports = class API {
     constructor(user, pass) {
@@ -19,7 +18,7 @@ module.exports = class API {
 
     getWsseHeader(user, pass) {
         let nonce = crypto.randomBytes(16).toString('hex');
-        let timestamp = iso8601.fromDate(new Date());
+        let timestamp = new Date().toISOString();
         let digest = this.base64Sha1(nonce + timestamp + pass);
         return 'UsernameToken Username="' + user + '", PasswordDigest="' + digest + '", Nonce="' + nonce + '", Created="' + timestamp + '"';
     }
