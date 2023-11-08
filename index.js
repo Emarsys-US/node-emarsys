@@ -1,41 +1,39 @@
 const rp = require('request-promise'),
-      crypto = require('crypto'),
-      iso8601 = require('iso8601');
+    crypto = require('crypto'),
+    iso8601 = require('iso8601');
 
 module.exports = class API {
-    constructor(user,pass) {
+    constructor(user, pass) {
         this.user = user;
         this.pass = pass;
         this.url = 'https://api.emarsys.net/api/v2';
     }
 
-    base64Sha1 (str) {
+    base64Sha1(str) {
         let hexDigest = crypto.createHash('sha1')
-        .update(str)
-        .digest('hex');
+            .update(str)
+            .digest('hex');
 
         return new Buffer(hexDigest).toString('base64');
     }
 
-     getWsseHeader (user, pass) {
+    getWsseHeader(user, pass) {
         let nonce = crypto.randomBytes(16).toString('hex');
         let timestamp = iso8601.fromDate(new Date());
-
         let digest = this.base64Sha1(nonce + timestamp + pass);
-
-        return 'UsernameToken Username="'+ user +'", PasswordDigest="'+ digest +'", Nonce="'+ nonce +'", Created="'+ timestamp +'"';
+        return 'UsernameToken Username="' + user + '", PasswordDigest="' + digest + '", Nonce="' + nonce + '", Created="' + timestamp + '"';
     }
 
-    parse (body,response) {
+    parse(body, response) {
         body = JSON.parse(body);
-        if(body.replyCode != 0) {
+        if (body.replyCode != 0) {
             throw new Error(body.replyText);
         }
         return body;
     }
 
-    setOptions (uri, optObj = {}) {
-        uri = uri.substring(0,1) === '/' ? uri : '/' + uri;
+    setOptions(uri, optObj = {}) {
+        uri = uri.substring(0, 1) === '/' ? uri : '/' + uri;
         return Object.assign({
             url: this.url + uri,
             headers: {
@@ -47,19 +45,43 @@ module.exports = class API {
         }, optObj);
     }
 
-    get (uri, data) {
-        return rp.get( this.setOptions(uri, {qs: data}) );
+    async get(uri, data) {
+        try {
+            const options = this.setOptions(uri, {qs: data});
+            return rp.get(options);
+        } catch (error) {
+            error.message = `Error making GET request to ${uri}: ${error.message}`;
+            throw error;
+        }
     }
 
-    put (uri, data) {
-        return rp.put( this.setOptions(uri, {body: JSON.stringify(data)}) );
+    async put(uri, data) {
+        try {
+            const options = this.setOptions(uri, {body: JSON.stringify(data)});
+            return rp.put(options);
+        } catch (error) {
+            error.message = `Error making PUT request to ${uri}: ${error.message}`;
+            throw error;
+        }
     }
 
-    post (uri, data) {
-        return rp.post( this.setOptions(uri, {body: JSON.stringify(data)}) );
+    async post(uri, data) {
+        try {
+            const options = this.setOptions(uri, {body: JSON.stringify(data)});
+            return rp.post(options);
+        } catch (error) {
+            error.message = `Error making POST request to ${uri}: ${error.message}`;
+            throw error;
+        }
     }
-    
-    delete (uri, data) {
-        return rp.delete( this.setOptions(uri, {qs: data}) );
+
+    async delete(uri, data) {
+        try {
+            const options = this.setOptions(uri, {qs: data});
+            return rp.delete(options);
+        } catch (error) {
+            error.message = `Error making DELETE request to ${uri}: ${error.message}`;
+            throw error;
+        }
     }
 };
