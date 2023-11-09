@@ -7,11 +7,19 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Adam Patarino",
+  "contributors": [
+    {
+      "name": "Christy Lewis"
+    },
+    {
+      "name": "Giuseppe Minnella",
+      "email": "giuseppe.minnella@gmail.com"
+    }
+  ],
   "repository": "https://github.com/Emarsys-US/node-emarsys.git",
   "license": "ISC",
   "dependencies": {
-    "crypto": "^1.0.1",
-    "iso8601": "^1.1.1",
-    "request-promise": "^4.2.2"
+    "axios": "^1.6.1",
+    "crypto": "^1.0.1"
   }
 }
