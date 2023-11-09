@@ -1,7 +1,7 @@
 # Emarsys API Wrapper
 
 Promise-based wrapper for the Emarsys API in NodeJS.
-[Emarsys API Documentation](https://dev.emarsys.com/v2/before-you-start/overview).
+[Emarsys API Documentation](https://dev.emarsys.com/docs/core-api-reference).
 
 ## Installation
 ```
@@ -9,7 +9,7 @@ $ npm i node-emarsys
 ```
 
 ```js
-const Emarsys = require('node-emarsys');
+import  * as Emarsys from 'node-emarsys';
 
 const api = new Emarsys('username', 'password');
 ```
@@ -56,9 +56,9 @@ api.get('/contact/query/', {
 ## constructor:
 
 
-    const emarsys = require('node-emarsys');
+    import  * as Emarsys from 'node-emarsys';
 
-    var apiHandler = new emarsys(user, pass);
+    const apiHandler = new Emarsys(user, pass);
 
 
 Creates a new Api handler object. Calling the methods associated with this handler object will make API requests using the username and password supplied to this constructor.
@@ -66,6 +66,7 @@ Creates a new Api handler object. Calling the methods associated with this handl
 Parameters:
 - **user**: the user name of the Emarsys API user
 - **pass**: the password of the Emarsys API user
+- **baseUrl**: optional, the base url of the Emarsys API. Defaults to 'https://api.emarsys.net/api/v2'
 
 [Creating a new API user](https://help.emarsys.com/hc/en-us/articles/115004740329#api-users)
 
@@ -104,9 +105,9 @@ In the event of an error, the [Promise](https://www.promisejs.org/) will be reje
 
     //Example
 
-    const emarsys = require('node-emarsys');
+    import  * as Emarsys from 'node-emarsys';
 
-    var apiHandler = new emarsys(user, pass);
+    const apiHandler = new Emarsys(user, pass);
 
     apiHandler.put('/contact', {
       "key_id": "3",
@@ -145,9 +146,9 @@ In the event of an error, the [Promise](https://www.promisejs.org/) will be reje
 
     //Example
 
-    const emarsys = require('node-emarsys');
+    import  * as Emarsys from 'node-emarsys';
 
-    var apiHandler = new emarsys(user, pass);
+    const apiHandler = new Emarsys(user, pass);
 
     apiHandler.post('/contact', {
           "key_id": "3",
@@ -187,9 +188,9 @@ In the event of an error, the [Promise](https://www.promisejs.org/) will be reje
 
     //Example
 
-    const emarsys = require('node-emarsys');
+    import  * as Emarsys from 'node-emarsys';
 
-    var apiHandler = new emarsys(user, pass);
+    const apiHandler = new Emarsys(user, pass);
 
     apiHandler.batch(
         '/contact', 
@@ -268,7 +269,5 @@ This method will never reject the returned promise. Any fully-erroneous requests
 
 
 ## Public packages used:
-- [request-promise](https://www.npmjs.com/package/request-promise)
-- [async](https://www.npmjs.com/package/async)
 - [crypto](https://nodejs.org/api/crypto.html)
-- [lodash](https://www.npmjs.com/package/lodash)
+- [axios](https://www.npmjs.com/package/axios)
